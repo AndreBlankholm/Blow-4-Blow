@@ -1,3 +1,9 @@
+// Game States
+// "WIN" - Player robot has defeated all enemy-robots
+//    * Fight all enemy-robots
+//    * Defeat each enemy-robot
+// "LOSE" - Player robot's health is zero or less
+
 var playerName = window.prompt("What is your players name?");
 var playerAttack = 20;
 var playerHealth = 100;
@@ -10,15 +16,15 @@ window.alert("Welcome to Blow 4 Blow, it's the fight of your life " + playerName
 
 console.log(playerName, playerAttack, playerHealth);
 
-var enemyName = "Big Sam";
+var enemyNames = ["Big Mook", "LIL Sam", "The big Boss"];
 var enemyAttack = 12;
 var enemyHealth = 50;
 
-console.log(enemyName,enemyAttack,enemyHealth);
+//console.log(enemyNames,enemyAttack,enemyHealth);
 
 
 
-var fight = function() {
+var fight = function(enemyName) {
     // Alert players that they are starting a new round
    
 
@@ -67,6 +73,7 @@ var fight = function() {
         
       } else {
         window.alert("You need to choose a valid option. Try again!");
+        
       }
 };
 
@@ -74,4 +81,6 @@ var fight = function() {
 
 
 
-fight();
+for(var i = 0; i < enemyNames.length; i++) {
+  fight(enemyNames[i]);
+}
