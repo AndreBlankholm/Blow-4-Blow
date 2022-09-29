@@ -25,11 +25,11 @@ var enemyHealth = 50;
 
 
 var fight = function(enemyName) {
-    // Alert players that they are starting a new round
    
-
-    var promptFight = window.prompt("Would you lik to Fight or Skip this battle?  Enter 'Fight' or 'Skip' to choose.");
-    if (promptFight === "fight" || promptFight === "FIGHT") {
+        while(enemyHealth > 0) {
+          // place fight function code block here . . .
+          var promptFight = window.prompt("Would you lik to Fight or Skip this battle?  Enter 'Fight' or 'Skip' to choose.");
+        if (promptFight === "fight" || promptFight === "FIGHT") {
         // remove enemy's health by subtracting the amount set in the playerAttack variable
         window.alert(" Your fighting " + enemyName + " and I dont think its a smart thing to do " + playerName + "! Fight Like your life depended on it!");
         enemyHealth = enemyHealth - playerAttack;
@@ -75,6 +75,7 @@ var fight = function(enemyName) {
         window.alert("You need to choose a valid option. Try again!");
         
       }
+        }
 };
 
 
@@ -82,5 +83,6 @@ var fight = function(enemyName) {
 
 
 for(var i = 0; i < enemyNames.length; i++) {
+  debugger;
   fight(enemyNames[i]);
 }
