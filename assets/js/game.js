@@ -10,7 +10,7 @@ var playerHealth = 100;
 var playerMoney = 10;
 
 window.alert( "Your players name is "+ playerName);
-window.alert("Welcome to Blow 4 Blow, it's the fight of your life " + playerName + "! Choose your choice on the next prompt wisley.");
+
 
 var enemyNames = ["Big Mook", "LIL Sam", "The Big Boss"];
 var enemyAttack = 12;
@@ -32,7 +32,7 @@ var fight = function(enemyName) {
         window.alert(playerName + " has chosen to skip the fight.  Goodbye!");
         playerMoney = playerMoney - 20;
         console.log(playerHealth,playerMoney);
-        window.alert(playerName + " has " + playerMoney + " Worth of money remaining.");
+        window.alert(playerName + " has " + playerMoney + " Worth of money.");
         break;
       } 
     } 
@@ -40,7 +40,7 @@ var fight = function(enemyName) {
     
     if (promptFight === "fight" || promptFight === "FIGHT" || promptFight === "f" || promptFight === "F") {
       // remove enemy's health by subtracting the amount set in the playerAttack variable
-      window.alert(" Your fighting " + enemyName + " and your have " + playerMoney + " worth of money so " + playerName + " fight Like your life depended on it!");
+      
       enemyHealth = enemyHealth - playerAttack;
       console.log(
         playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining."
@@ -83,7 +83,22 @@ var fight = function(enemyName) {
 // and resets enemy health to 50
 
 for(var i = 0; i < enemyNames.length; i++) {
-  enemyHealth = 50;
-  alert("Next up is " + enemyNames[i] + "!");
-  fight(enemyNames[i]);
+
+  if (playerHealth > 0) {
+     // let player know what round they are in, remember that arrays start at 0 so it needs to have 1 added to it
+    window.alert("Welcome to Blow-4-Blow! Round " + (i + 1));
+
+    // pick new enemy to fight based on the index of the enemyNames array
+    var pickedEnemyName = enemyNames[i];
+    window.alert(" Your fighting " + enemyName + " and your have " + playerMoney + " worth of money so fight or skip like your life depended on it " + playerName + " !");
+    // reset enemyHealth before starting new fight
+    enemyHealth = 50;
+
+    // use debugger to pause script from running and check what's going on at that moment in the code
+    debugger;
+
+    // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
+    fight(pickedEnemyName);
+  }
+  
 }
