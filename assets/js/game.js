@@ -90,7 +90,7 @@ for(var i = 0; i < enemyNames.length; i++) {
 
     // pick new enemy to fight based on the index of the enemyNames array
     var pickedEnemyName = enemyNames[i];
-    window.alert(" Your fighting " + enemyName + " and your have " + playerMoney + " worth of money so fight or skip like your life depended on it " + playerName + " !");
+    window.alert(" Your fighting " + enemyNames[i] + " and your have " + playerMoney + " worth of money so fight or skip like your life depended on it " + playerName + " !");
     // reset enemyHealth before starting new fight
     enemyHealth = 50;
 
@@ -99,6 +99,9 @@ for(var i = 0; i < enemyNames.length; i++) {
 
     // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
     fight(pickedEnemyName);
+  } else {
+    window.alert(" You have and youe but whooped and now the game is over!");
+    break;
   }
   
 }
