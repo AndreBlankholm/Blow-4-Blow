@@ -30,7 +30,7 @@ var fight = function(enemyName) {
       if (confirmSkip) {
         window.alert("Player has chosen to skip this round.");
         window.alert(playerName + " has chosen to skip the fight.  Goodbye!");
-        playerMoney = playerMoney - 20;
+        playerMoney = Math.max(0, playerMoney - 10);
         console.log(playerHealth,playerMoney);
         window.alert(playerName + " has " + playerMoney + " Worth of money.");
         break;
@@ -39,9 +39,12 @@ var fight = function(enemyName) {
     // place fight function code block here . . .
     
     if (promptFight === "fight" || promptFight === "FIGHT" || promptFight === "f" || promptFight === "F") {
-      // remove enemy's health by subtracting the amount set in the playerAttack variable
-      
-      enemyHealth = enemyHealth - playerAttack;
+
+      // generate random damage value based on player's attack power
+      var damage = randomNumberGen(playerAttack - 3, playerAttack);
+
+      enemyHealth = Math.max(0, enemyHealth - damage);
+
       console.log(
         playerName + " attacked " + enemyName + ". " + enemyName + " now has " + enemyHealth + " health remaining."
       );
@@ -56,7 +59,10 @@ var fight = function(enemyName) {
       }
     
       // remove player's health by subtracting the amount set in the enemyAttack variable
-      playerHealth = playerHealth - enemyAttack;
+
+      var damage = randomNumberGen(enemyAttack - 3, enemyAttack);
+
+      playerHealth = Math.max(0, playerHealth - damage);
 
       console.log(
         enemyName + " attacked " + playerName + ". " + playerName + " now has " + playerHealth + " health remaining."
@@ -99,13 +105,13 @@ var startGame = function() {
       var pickedEnemyName = enemyNames[i];
       window.alert(" Your fighting " + enemyNames[i] + " and your have " + playerMoney + " worth of money so fight or skip like your life depended on it " + playerName + " !");
       // reset enemyHealth before starting new fight
-      enemyHealth = 50;
+      enemyHealth = randomNumberGen(40, 60);
   
       // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
       fight(pickedEnemyName);
 
       //enter shop if there is still room on enemy array
-      if (playerHealth > 0 && i < enemyNames.length - 1 && playerMoney >= 0) {
+      if (playerHealth > 0 && i < enemyNames.length - 1 && playerMoney >= 7) {
 
         var storeConfirm = window.confirm(" Do you want to enter the shop before the next round to upgrade?");
         
@@ -197,6 +203,12 @@ var shop = function() {
 
       break;
   }
+};
+
+// just adding the randomization of numbers function anywhere in this file. perferrably at the bottom
+var randomNumberGen = function() {
+var value = Math.floor(Math.random() * 21) + 40;
+return value;
 };
 
 startGame();
