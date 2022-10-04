@@ -12,7 +12,7 @@ var randomNumberGen = function() {
   
 
 var playerInfo = {
-  name: window.prompt(" Welcom to BLOW-4_Blow!   What is your player's name?"),
+  name: window.prompt(" Welcom to BLOW-4-BLOW!   What is your player's name?"),
   health: 100,
   attack: 10,
   money:20
