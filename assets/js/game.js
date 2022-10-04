@@ -104,6 +104,16 @@ var startGame = function() {
       // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
       fight(pickedEnemyName);
 
+      //enter shop if there is still room on enemy array
+      if (playerHealth > 0 && i < enemyNames.length - 1 && playerMoney >= 0) {
+
+        var storeConfirm = window.confirm(" Do you want to enter the shop before the next round to upgrade?");
+        
+        if (storeConfirm) {
+          shop();
+        }
+      }
+
     } else {
       window.alert(" You have lost and got whooped and now the game is over!");
       break;
@@ -121,15 +131,72 @@ var endGame = function() {
     window.alert("The game has ended. Let's see how you did!");
   }
 
-  var playAgainConfirm = window.prompt( "Would you like to play again?")
+  var playAgainConfirm = window.confirm( "Would you like to play again?")
 
   if (playAgainConfirm) {
     //restart game
     startGame();
   } else {
-    window.alert(" Thank you for playing the best windows pop up game ever made, Blow-4-Blow! Please come back and play again.")
+    window.alert(" Thank you " + playerName + " for playing the best windows pop up game ever made, Blow-4-Blow! Please come back and play again anytime.");
   }
 };
 
+
+var shop = function() {
+
+  var optionWhenShoppingPrompt = window.prompt(" Would you like to REFILL your Health, UPGRADE your attack, or LEAVE the Store? Please enter one: 'HEALTH', 'ATTACK', or 'LEAVE' to make a choice.");
+
+  switch (optionWhenShoppingPrompt) {
+    case "health":
+    case "HEALTH":
+    case "h":
+    case "H":
+      if (playerMoney >= 7) {
+        window.alert("Refilling player's health by 20 for 7 dollars.");
+  
+        // increase health and decrease money
+        playerHealth = playerHealth + 20;
+        playerMoney = playerMoney - 7;
+
+      } else {
+        window.alert("You dont have enough money, sorry!")
+      }
+      
+      break;
+
+    case "attack":
+    case "ATTACK":
+    case "a":
+    case "A":
+      if (playerMoney >= 7) {
+        window.alert("Upgrading player's attack by 6 for 7 dollars.");
+
+        
+        playerAttack = playerAttack + 6;
+        playerMoney = playerMoney - 7;
+      }
+      else {
+        window.alert("You don't have enough money!");
+      }
+      break;
+
+    case "leave":
+    case "LEAVE":
+    case "l":
+    case "L":
+      window.alert("Leaving the store.");
+  
+      // do nothing, so function will end
+      break;
+
+    default:
+      window.alert("You did not pick a valid option. Try again.");
+  
+      // call shop() again to force player to pick a valid option
+      shop();
+
+      break;
+  }
+};
 
 startGame();
