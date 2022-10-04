@@ -28,7 +28,7 @@ var fight = function(enemyName) {
       var confirmSkip = window.confirm("Are you sure you want to skip?");
 
       if (confirmSkip) {
-        window.alert("Player has choosen to skip this round.");
+        window.alert("Player has chosen to skip this round.");
         window.alert(playerName + " has chosen to skip the fight.  Goodbye!");
         playerMoney = playerMoney - 20;
         console.log(playerHealth,playerMoney);
@@ -82,26 +82,54 @@ var fight = function(enemyName) {
 // this for loop lets me access every index in the array of (enemyNames)
 // and resets enemy health to 50
 
-for(var i = 0; i < enemyNames.length; i++) {
+var startGame = function() {
+
+  //at the start of the game I need to reset the theplayer stats
+  playerHealth = 100;
+  playerAttack = 10;
+  playerMoney = 10;
+
+  for(var i = 0; i < enemyNames.length; i++) {
+
+    if (playerHealth > 0) {
+       // let player know what round they are in, remember that arrays start at 0 so it needs to have 1 added to it
+      window.alert("Welcome to Blow-4-Blow! Round " + (i + 1));
+  
+      // pick new enemy to fight based on the index of the enemyNames array
+      var pickedEnemyName = enemyNames[i];
+      window.alert(" Your fighting " + enemyNames[i] + " and your have " + playerMoney + " worth of money so fight or skip like your life depended on it " + playerName + " !");
+      // reset enemyHealth before starting new fight
+      enemyHealth = 50;
+  
+      // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
+      fight(pickedEnemyName);
+
+    } else {
+      window.alert(" You have lost and got whooped and now the game is over!");
+      break;
+    }
+  }
+  endGame();
+};
+
+var endGame = function() {
 
   if (playerHealth > 0) {
-     // let player know what round they are in, remember that arrays start at 0 so it needs to have 1 added to it
-    window.alert("Welcome to Blow-4-Blow! Round " + (i + 1));
+    window.alert("Great job, you survived the game! You know have a score of " + playerHealth + " .");
 
-    // pick new enemy to fight based on the index of the enemyNames array
-    var pickedEnemyName = enemyNames[i];
-    window.alert(" Your fighting " + enemyNames[i] + " and your have " + playerMoney + " worth of money so fight or skip like your life depended on it " + playerName + " !");
-    // reset enemyHealth before starting new fight
-    enemyHealth = 50;
-
-    // use debugger to pause script from running and check what's going on at that moment in the code
-    debugger;
-
-    // pass the pickedEnemyName variable's value into the fight function, where it will assume the value of the enemyName parameter
-    fight(pickedEnemyName);
   } else {
-    window.alert(" You have and youe but whooped and now the game is over!");
-    break;
+    window.alert("The game has ended. Let's see how you did!");
   }
-  
-}
+
+  var playAgainConfirm = window.prompt( "Would you like to play again?")
+
+  if (playAgainConfirm) {
+    //restart game
+    startGame();
+  } else {
+    window.alert(" Thank you for playing the best windows pop up game ever made, Blow-4-Blow! Please come back and play again.")
+  }
+};
+
+
+startGame();
